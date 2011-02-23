@@ -14,7 +14,7 @@
 */
 var Slickmap = function() {
     String.prototype.stripId = function() {
-        return this.toLowerCase().split(" ").join("_").replace(/[!?@#$%&*(){}]/g, "").replace(/����/g, "a").replace(/���/g, "e").replace(/���/g, "i").replace(/����/g, "o").replace(/���/g, "u").replace(/�/g, "c");
+        return this.toLowerCase().split(" ").join("_").replace(/[[\]{}<>,.;\/?:!@#$%&*()\-+=]/g, "").replace(/[áàãâ]/g, "a").replace(/[éèê]/g, "e").replace(/[íìî]/g, "i").replace(/[óòôõ]/g, "o").replace(/[úùû]/g, "u").replace(/[ç]/g, "c");
     };
 
     function getMap() {
