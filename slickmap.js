@@ -12,9 +12,9 @@
  @Inspired on Fbug and ConsoleDummy:
    http://astuteo.com/slickmap/
 */
-;var Slickmap = function() {
+var Slickmap = function() {
     String.prototype.stripId = function() {
-        return this.toLowerCase().split(" ").join("_").replace(/[!?@#$%&*(){}]/g, "").replace(/багв/g, "a").replace(/йик/g, "e").replace(/нмо/g, "i").replace(/утфх/g, "o").replace(/ъщы/g, "u").replace(/з/g, "c");
+        return this.toLowerCase().split(" ").join("_").replace(/[!?@#$%&*(){}]/g, "").replace(/пїЅпїЅпїЅпїЅ/g, "a").replace(/пїЅпїЅпїЅ/g, "e").replace(/пїЅпїЅпїЅ/g, "i").replace(/пїЅпїЅпїЅпїЅ/g, "o").replace(/пїЅпїЅпїЅ/g, "u").replace(/пїЅ/g, "c");
     };
 
     function getMap() {
