@@ -1,4 +1,4 @@
-﻿/*
+/*
  slickmap v 0.1
  Developed by Rodrigo Castilho
  email: rodcast@gmail.com
@@ -12,7 +12,7 @@
  @Inspired on SlickMap CSS:
    http://astuteo.com/slickmap/
 */
-var Slickmap = function() {
+var Slickmap = (function(d) {
     String.prototype.stripId = function() {
         return this.toLowerCase().split(" ").join("_").replace(/[\[\]{}<>,.;\/?:!@#$%&*()\-+=]/g, "").replace(/[áàãâ]/g, "a").replace(/[éèê]/g, "e").replace(/[íìî]/g, "i").replace(/[óòôõ]/g, "o").replace(/[úùû]/g, "u").replace(/[ç]/g, "c");
     };
@@ -21,7 +21,6 @@ var Slickmap = function() {
         if (typeof (_slickmap) !== "undefined") {
             try {
                 var 
-                    d = document,
                     sitemap = d.getElementById("sitemap"),
                     h1 = d.createElement("h1"),
                     h2 = d.createElement("h2");
@@ -80,4 +79,4 @@ var Slickmap = function() {
             getMap();
         }
     };
-}();
+})(document);
