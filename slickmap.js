@@ -1,4 +1,4 @@
-/*
+﻿/*
  slickmap v 0.1
  Developed by Rodrigo Castilho
  email: rodcast@gmail.com
@@ -14,7 +14,7 @@
 */
 var Slickmap = (function(d) {
     String.prototype.stripId = function() {
-        return this.toLowerCase().split(" ").join("_").replace(/[\[\]{}<>,.;\/?:!@#$%&*()\-+=]/g, "").replace(/[áàãâ]/g, "a").replace(/[éèê]/g, "e").replace(/[íìî]/g, "i").replace(/[óòôõ]/g, "o").replace(/[úùû]/g, "u").replace(/[ç]/g, "c");
+        return this.toLowerCase().replace(/^\s*|\s$/g, "").replace(/\s+/g, "_").replace(/[áàâãäª]/g, "a").replace(/[éèêë]/g, "e").replace(/[íìîï]/g, "i").replace(/[óòôõöº]/g, "o").replace(/[úùûü]/g, "u").replace(/ç/g, "c").replace(/\W/g, "_").replace(/_+/g, "_");
     };
 
     function getMap() {
@@ -53,7 +53,7 @@ var Slickmap = (function(d) {
                         li.appendChild(a);
 
                         if (items.item) {
-                            li.appendChild(mapTree(items));
+                            li.appendChild(arguments.callee(items));
                         }
 
                         ul.appendChild(li);
