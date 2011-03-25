@@ -1,4 +1,4 @@
-﻿/*
+/*
  slickmap v 0.1
  Developed by Rodrigo Castilho
  email: rodcast@gmail.com
@@ -79,4 +79,4 @@ var Slickmap = (function(d) {
             getMap();
         }
     };
-})(document);
+}(document));
