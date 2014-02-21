@@ -19,12 +19,12 @@ var SlickMap = (function(d, _slickmap) {
     return this.toLowerCase().replace(/^\s*|\s$/g, '').replace(/\s+/g, '_').replace(/[áàâãäª]/g, 'a').replace(/[éèêë]/g, 'e').replace(/[íìîï]/g, 'i').replace(/[óòôõöº]/g, 'o').replace(/[úùûü]/g, 'u').replace(/ç/g, 'c').replace(/\W/g, '_').replace(/_+/g, '_');
   };
 
-  Object.prototype.isJSON = function(o) {
+  function isJSON(o) {
     return (!JSON.stringify(o) ? true : false);
   };
 
   function getMap() {
-    if (_slickmap && _slickmap.isJSON()) {
+    if (_slickmap && isJSON(_slickmap)) {
       var sitemap = d.getElementById('sitemap'), //sitemap = d.querySelector('#sitemap')
           h1 = d.createElement('h1'),
           h2 = d.createElement('h2');
