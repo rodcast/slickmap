@@ -1,5 +1,5 @@
 /*!
- slickmap v 0.1
+ SlickMap v 0.1
  Developed by Rodrigo Castilho
  email: rodcast@gmail.com
  site: http://rodrigocastilho.com
@@ -12,36 +12,39 @@
  @Inspired on SlickMap CSS:
    http://astuteo.com/slickmap/
  */
-var Slickmap = Slickmap || (function(d) {
-  "use strict";
-  
+var SlickMap = (function(d, _slickmap) {
+  'use strict';
+
   String.prototype.stripId = function() {
-    return this.toLowerCase().replace(/^\s*|\s$/g, "").replace(/\s+/g, "_").replace(/[áàâãäª]/g, "a").replace(/[éèêë]/g, "e").replace(/[íìîï]/g, "i").replace(/[óòôõöº]/g, "o").replace(/[úùûü]/g, "u").replace(/ç/g, "c").replace(/\W/g, "_").replace(/_+/g, "_");
+    return this.toLowerCase().replace(/^\s*|\s$/g, '').replace(/\s+/g, '_').replace(/[áàâãäª]/g, 'a').replace(/[éèêë]/g, 'e').replace(/[íìîï]/g, 'i').replace(/[óòôõöº]/g, 'o').replace(/[úùûü]/g, 'u').replace(/ç/g, 'c').replace(/\W/g, '_').replace(/_+/g, '_');
+  };
+
+  Object.prototype.isJSON = function(o) {
+    return (!JSON.stringify(o) ? true : false);
   };
 
   function getMap() {
-    if (_slickmap instanceof Object && _slickmap.hasOwnProperty("items")) {
-      try {
-        var sitemap = d.getElementById("sitemap"),
-            h1 = d.createElement("h1"),
-            h2 = d.createElement("h2");
+    if (_slickmap && _slickmap.isJSON()) {
+      var sitemap = d.getElementById('sitemap'), //sitemap = d.querySelector('#sitemap')
+          h1 = d.createElement('h1'),
+          h2 = d.createElement('h2');
 
-        sitemap.className = "sitemap";
+      sitemap.className = 'sitemap';
 
-        h1.innerHTML = _slickmap.title || "";
-        h2.innerHTML = _slickmap.subtitle || "";
+      h1.innerHTML = _slickmap.title || '';
+      h2.innerHTML = _slickmap.subtitle || '';
 
-        sitemap.appendChild(h1).parentNode.appendChild(h2);
+      sitemap.appendChild(h1).parentNode.appendChild(h2);
 
-        var mapTree = function(map) {
-          var i = 0,
-              l = map.item.length,
-              items, a, li,
-              ul = d.createElement("ul");
+      var mapTree = function(map) {
+        var item = map.item,
+            ul = d.createElement('ul'),
+            items, i, a, li;
 
-          for (; i < l; i++) {
-            li = d.createElement("li");
-            a = d.createElement("a");
+        for (i in item) {
+          if (item.hasOwnProperty(i)) {
+            li = d.createElement('li');
+            a = d.createElement('a');
 
             items = map.item[i];
 
@@ -53,28 +56,23 @@ var Slickmap = Slickmap || (function(d) {
             li.appendChild(a);
 
             if (items.item) {
-              li.appendChild(arguments.callee(items));
+              li.appendChild(mapTree.call(this, items));
             }
 
             ul.appendChild(li);
           }
-          
-          return ul;
-        };
-
-        if (_slickmap.hasOwnProperty("items")) {
-          sitemap.appendChild(mapTree(_slickmap.items[0]));
-          sitemap.getElementsByTagName("ul")[0].id = "primaryNav";
         }
-      } catch (e) {
-        alert(e);
+        
+        return ul;
+      };
+
+      if (_slickmap.hasOwnProperty('items')) {
+        sitemap.appendChild(mapTree(_slickmap.items[0]));
+        sitemap.getElementsByTagName('ul')[0].id = 'primaryNav';
+        //sitemap.querySelector('ul').id = 'primaryNav';
       }
     }
   }
 
-  return {
-    init: function() {
-      getMap();
-    }
-  };
-}(document));
+  return getMap();
+})(document, _slickmap);
